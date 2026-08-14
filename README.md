@@ -105,17 +105,20 @@ To add a new script, add an entry to `SCRIPTS` with its font and corpus file
 
 ## Limitations
 
-- **Sharada calligraphy:** no open-source cursive/handwriting-style Sharada
-  font currently exists (Sharada is a rare, largely liturgical script with
-  minimal digital typography investment). As a fallback, Sharada glyphs are
-  rendered with a print font and post processed with a stroke-distortion
-  filter (`apply_stroke_distortion`) — mild elastic warp and stroke-thickness
-  jitter  to reduce mechanical uniformity. This does not fully replicate
-  genuine handwriting and is a documented, deliberate trade-off given no
-  better font resource is currently available.
-- The scanned real-paper background path is cached after first generation
-  (`data/bg_paper.png`) for performance; delete this file to force
-  regeneration from the source sample image.
+Modi multi-block and columnar rendering constraints: Modi script resides in the Supplementary Multilingual Plane (SMP: U+11600–U+1165F) and relies on the Universal Shaping Engine (USE) rather than standard Indic shaping (dev2/deva). When segmenting text into multiple independent layout blocks or narrow margin columns, breaking complex glyph clusters and cursive ligature runs across spatial boundaries can cause cluster detaching and baseline disjoints. While multi-block alignment renders seamlessly in Devanagari, Modi folios prioritize continuous, unbroken text flow blocks to ensure cluster integrity and prevent shaping engine fallback artifacts.
+
+Sharada calligraphy: no open-source cursive/handwriting-style Sharada
+font currently exists (Sharada is a rare, largely liturgical script with
+minimal digital typography investment). As a fallback, Sharada glyphs are
+rendered with a print font and post processed with a stroke-distortion
+filter (apply_stroke_distortion) — mild elastic warp and stroke-thickness
+jitter  to reduce mechanical uniformity. This does not fully replicate
+genuine handwriting and is a documented, deliberate trade-off given no
+better font resource is currently available.
+
+The scanned real-paper background path is cached after first generation
+(data/bg_paper.png) for performance; delete this file to force
+regeneration from the source sample image.
 
 ## License
 
