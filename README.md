@@ -1,8 +1,8 @@
 # Indic Manuscript Synthesis Pipeline
 
-An automated, end-to-end Python pipeline that synthesizes realistic historical
+An automated, end to end Python pipeline that synthesizes realistic historical
 manuscript folios (page images) for three Indic scripts — **Devanagari**,
-**Modi**, and **Sharada** — along with fully synchronized ground-truth
+**Modi**, and **Sharada**  along with fully synchronized ground-truth
 annotations. Built to produce training data for OCR models on historical
 handwritten manuscripts.
 
@@ -12,13 +12,13 @@ The pipeline generates synthetic manuscript page images from raw corpus text,
 producing paired `.png` images and `.md` ground-truth annotation files. Each
 generated folio includes:
 
-- A realistic background (aged handmade paper, palm-leaf, or vellum/parchment)
+- A realistic background (aged handmade paper, palm leaf, or vellum/parchment)
   with authentic texture, aging (stains, foxing speckles, warm tint), and
   physical deformation (page curl, folds, surface warping)
-- Handwriting-style calligraphic text rendering with natural waviness, slant,
+- Handwriting style calligraphic text rendering with natural waviness, slant,
   and per-word irregularity
 - Traditional manuscript layout: ruled writing margins, marginal annotations,
-  section/punctuation markers, and highlighted (red-ink) text
+  section/punctuation markers, and highlighted (red ink) text
 - Ink artifacts: bleed, smudges, and occasional faded strokes
 - A torn/deckled page edge
 
@@ -28,7 +28,7 @@ The generated dataset is hosted publicly on Hugging Face:
 
 **[Shad0w1nonly/indic-manuscript-synthetic](https://huggingface.co/datasets/Shad0w1nonly/indic-manuscript-synthetic)**
 
-It contains three subsets — `devanagari`, `modi`, `sharada` — each with:
+It contains three subsets — `devanagari`, `modi`, `sharada`  each with:
 
 | Split      | Images |
 |------------|--------|
@@ -36,7 +36,7 @@ It contains three subsets — `devanagari`, `modi`, `sharada` — each with:
 | validation | 10     |
 | test       | 5      |
 
-Each image (`Image_N.png`) has a matching ground-truth annotation file
+Each image (`Image_N.png`) has a matching ground truth annotation file
 (`Image_N.md`) containing the exact rendered text, including any marginal
 note.
 
@@ -54,7 +54,7 @@ manuscript-generator/
 │   ├── devanagari_md.md
 │   ├── Modi_md.md
 │   └── sharada_md.md
-├── dataset_output/        # Generated output (gitignored — see Hugging Face link above)
+├── dataset_output/        # Generated output (gitignored - see Hugging Face link above)
 │   └── <script>/<split>/Image_N.png + Image_N.md
 └── requirements.txt
 ```
@@ -73,7 +73,7 @@ pip install -r requirements.txt
 ```
 
 **Fonts:** Devanagari (Kalam) and Modi (MarathiCursiveT) fonts are genuine
-open-source handwriting-style fonts and should be placed in `fonts/`. See
+open source handwriting-style fonts and should be placed in `fonts/`. See
 comments in `generate.py`'s `SCRIPTS` config for exact filenames and sources.
 
 ## Usage
@@ -101,16 +101,16 @@ Key parameters live at the top of `generate.py` and in the `SCRIPTS` dict:
   `get_master_background`
 
 To add a new script, add an entry to `SCRIPTS` with its font and corpus file
-— no other code changes are required.
+ no other code changes are required.
 
 ## Limitations
 
 - **Sharada calligraphy:** no open-source cursive/handwriting-style Sharada
   font currently exists (Sharada is a rare, largely liturgical script with
   minimal digital typography investment). As a fallback, Sharada glyphs are
-  rendered with a print font and post-processed with a stroke-distortion
+  rendered with a print font and post processed with a stroke-distortion
   filter (`apply_stroke_distortion`) — mild elastic warp and stroke-thickness
-  jitter — to reduce mechanical uniformity. This does not fully replicate
+  jitter  to reduce mechanical uniformity. This does not fully replicate
   genuine handwriting and is a documented, deliberate trade-off given no
   better font resource is currently available.
 - The scanned real-paper background path is cached after first generation
