@@ -109,12 +109,7 @@ Modi multi-block and columnar rendering constraints: Modi script resides in the 
 
 Sharada calligraphy: no open-source cursive/handwriting-style Sharada
 font currently exists (Sharada is a rare, largely liturgical script with
-minimal digital typography investment). As a fallback, Sharada glyphs are
-rendered with a print font and post processed with a stroke-distortion
-filter (apply_stroke_distortion) — mild elastic warp and stroke-thickness
-jitter  to reduce mechanical uniformity. This does not fully replicate
-genuine handwriting and is a documented, deliberate trade-off given no
-better font resource is currently available.
+minimal digital typography investment). As a fallback, Sharada glyphs are rendered with a static print font (NotoSansSharada-Regular.ttf) through the same HarfBuzz+FreeType rendering path as the other scripts — no post-processing distortion filter is currently applied. A stroke-distortion pass (mild elastic warp and stroke-thickness jitter to reduce mechanical uniformity) is a natural next step to better approximate handwriting, but is not yet implemented. This is a documented, deliberate trade-off given no better cursive font resource is currently available.
 
 The scanned real-paper background path is cached after first generation
 (data/bg_paper.png) for performance; delete this file to force
